@@ -1,5 +1,5 @@
 package("Satori")
-
+    set_kind("headeronly")
     set_homepage("https://github.com/yangyangzhong82/Satori-Release")
     set_description("Satori SDK for event recording.")
     add_urls("https://github.com/yangyangzhong82/Satori-Release.git", {alias = "git"})
