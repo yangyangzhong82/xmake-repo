@@ -11,14 +11,9 @@ package("Satori")
     --     os.cp("include", package:installdir())
     --     os.cp("lib", package:installdir())
     -- end)
-    on_install(function (package)
-        -- Copy contents of include and lib directories from the extracted SatoriSDK folder
-        os.cp("include", package:installdir("include"))
-        os.cp("lib", package:installdir("lib"))
-    end)
+on_install(function (package)
+    if os.isdir("include") then
+        os.cp("*", package:installdir())
 
-    on_load(function (package)
-        package:add("includedirs", "include")
-        package:add("linkdirs", "lib")
-        package:add("links", "Satori")
-    end)
+-- 结束 on_install 函数的定义
+end)
