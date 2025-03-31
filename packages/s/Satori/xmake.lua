@@ -13,8 +13,8 @@ package("Satori")
     -- end)
     on_install(function (package)
         -- Copy contents of include and lib directories from the extracted SatoriSDK folder
-        os.cp("SatoriSDK/include", package:installdir("include"))
-        os.cp("SatoriSDK/lib", package:installdir("lib"))
+        os.cp("include", package:installdir("include"))
+        os.cp("lib", package:installdir("lib"))
     end)
 
     on_load(function (package)
