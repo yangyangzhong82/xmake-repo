@@ -14,6 +14,6 @@ package("Satori")
 on_install(function (package)
     if os.isdir("include") then
         os.cp("*", package:installdir())
+    end 
 
--- 结束 on_install 函数的定义
-end)
+end) 结束 on_install 调用
