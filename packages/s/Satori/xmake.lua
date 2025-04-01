@@ -5,7 +5,7 @@ package("Satori")
     add_deps("nlohmann_json")
 
     add_urls("https://github.com/yangyangzhong82/Satori-Release/releases/download/0.0.1/SatoriSDK.zip")
-    add_versions("0.0.1", "f7c68782136db29f503b32cff43dd0c280d8317e662407f8c46959508cf9618b")
+    add_versions("0.0.1", "b71f0594630d1a8a2b8bf147d9335038c7548f990614bc76cb14a11397a08291")
 
     -- on_install(function (package)
     --     os.cp("include", package:installdir())
