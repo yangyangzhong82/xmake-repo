@@ -12,17 +12,27 @@ package("Satori")
     --     os.cp("lib", package:installdir())
     -- end)
     on_install(function (package)
-        -- 如果解压后存在 include 目录，则将其复制到安装目录下的 include 子目录
-        if os.isdir("include") then
-            os.cp("include", package:installdir("include"))
+        -- ... (现有的文件复制逻辑) ...
+        -- 探测并存储实际的 include 和 lib 目录路径
+        local includedir = package:installdir("include")
+        local libdir = package:installdir("lib")
+        -- 处理可能的嵌套 lib 目录
+        local actual_libdir = path.join(libdir, "lib")
+        if os.isdir(actual_libdir) then
+            libdir = actual_libdir
         end
-        -- 如果解压后存在 lib 目录，则将其复制到安装目录下的 lib 子目录
-        if os.isdir("lib") then
-            os.cp("lib", package:installdir("lib"))
+        package:data_set("includedir", includedir)
+        package:data_set("libdir", libdir)
+    end)
+
+    on_load(function (package)
+        local includedir = package:data("includedir")
+        local libdir = package:data("libdir")
+        if includedir and os.isdir(includedir) then
+            package:add("includedirs", includedir) -- 添加包含路径
         end
-        -- 如果还有其他需要复制的目录或文件（例如 bin, licenses），可以类似添加
-        -- if os.isdir("bin") then
-        --     os.cp("bin", package:installdir("bin"))
-        -- end
-        -- os.cp("LICENSE.txt", package:installdir())
+        if libdir and os.isdir(libdir) then
+            package:add("linkdirs", libdir)       -- 添加库文件搜索路径
+        end
+        package:add("links", "Satori")          -- 添加要链接的库名
     end)
