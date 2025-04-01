@@ -16,4 +16,4 @@ on_install(function (package)
         os.cp("*", package:installdir())
     end 
 
-end) 结束 on_install 调用
+end) 
