@@ -11,9 +11,18 @@ package("Satori")
     --     os.cp("include", package:installdir())
     --     os.cp("lib", package:installdir())
     -- end)
-on_install(function (package)
-    if os.isdir("include") then
-        os.cp("*", package:installdir())
-    end 
-
-end) 
+    on_install(function (package)
+        -- 如果解压后存在 include 目录，则将其复制到安装目录下的 include 子目录
+        if os.isdir("include") then
+            os.cp("include", package:installdir("include"))
+        end
+        -- 如果解压后存在 lib 目录，则将其复制到安装目录下的 lib 子目录
+        if os.isdir("lib") then
+            os.cp("lib", package:installdir("lib"))
+        end
+        -- 如果还有其他需要复制的目录或文件（例如 bin, licenses），可以类似添加
+        -- if os.isdir("bin") then
+        --     os.cp("bin", package:installdir("bin"))
+        -- end
+        -- os.cp("LICENSE.txt", package:installdir())
+    end)
