@@ -9,23 +9,22 @@ package("Satori")
     -- on_install(function (package)
     -- end)
 
-    on_load(function (package)
-        -- 直接使用 package:installdir() 拼接正确的相对路径
-        local includedir = path.join(package:installdir(), "SatoriSDK", "include")
-        local libdir = path.join(package:installdir(), "SatoriSDK", "lib")
+on_load(function (package)
+    -- 直接在安装目录下查找 include 和 lib
+    local includedir = path.join(package:installdir(), "include") -- 移除了 "SatoriSDK"
+    local libdir = path.join(package:installdir(), "lib")       -- 移除了 "SatoriSDK"
 
-        if os.isdir(includedir) then
-            package:add("includedirs", includedir) -- 添加包含路径
-        else
-            -- 如果需要，可以添加警告或错误信息
-            -- print("warning: include directory not found at " .. includedir)
-        end
+    if os.isdir(includedir) then
+        package:add("includedirs", includedir) -- 添加包含路径
+    else
+        -- 如果需要，可以添加警告或错误信息
+        -- print("warning: include directory not found at " .. includedir)
+    end
 
-        if os.isdir(libdir) then
-            package:add("linkdirs", libdir) -- 添加库文件搜索路径
-        else
-            -- print("warning: lib directory not found at " .. libdir)
-        end
-
-        package:add("links", "Satori") -- 添加要链接的库名
-    end)
+    if os.isdir(libdir) then
+        package:add("linkdirs", libdir) -- 添加库文件搜索路径
+    else
+        -- print("warning: lib directory not found at " .. libdir)
+    end
+    package:add("links", "Satori") -- 添加要链接的库名
+end)
