@@ -4,7 +4,7 @@ package("Satori")
 
     add_urls("https://github.com/yangyangzhong82/Satori-Release/releases/download/$(version)/SatoriSDK.zip")
     add_versions("0.0.1", "28498798b7f1507fa79b13af85af370ec428c08839fe89863723d25f9df1ca75")
-    add_versions("0.0.3", "6aa950ec28541a6b948f9435ed2b7e31a4ab6b3ae75fc64980f72334f7ab2cb9")
+    add_versions("0.0.3", "53898cf59cea249a6d4072f85b35e5f7742e6b27c1519aa1bcbb2bd803881b25")
 on_install(function(package)
     os.cp("*", package:installdir())
 end)
