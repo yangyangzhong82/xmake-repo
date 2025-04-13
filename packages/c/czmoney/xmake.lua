@@ -1,6 +1,6 @@
 package("czmoney")
     add_urls("https://github.com/yangyangzhong82/czmoney/releases/download/$(version)/czmoney-windows-x64.zip")
-    add_versions("0.0.3", "88695a7abc7335563470db87f1714ac7ce146c9dc938050787acbdcc7bf2f6eb")
+    add_versions("0.0.5", "1378552f1c3bf3d7819aaa70364f3ed763db61449db7c39c0faa0306e3b9e69a")
 
     on_install(function (package)
         os.cp("include", package:installdir())
