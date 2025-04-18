@@ -72,7 +72,7 @@ package("mysql-connector-cpp")
         if package:is_plat("linux") then
             package:add("syslinks", "pthread", "m", "dl")
         elseif package:is_plat("windows") then
-             -- Dependencies like ws2_32 might be needed, check linker errors if any
-             package:add("syslinks", "ws2_32", "secur32")
+             -- Dependencies like ws2_32, secur32 and crypt32 (for OpenSSL CAPI engine) might be needed
+             package:add("syslinks", "ws2_32", "secur32", "crypt32")
         end
     end)
