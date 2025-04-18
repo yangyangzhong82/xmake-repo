@@ -6,7 +6,7 @@ package("mysql-connector-cpp")
 
     add_urls("https://github.com/mysql/mysql-connector-cpp/archive/refs/tags/$(version).tar.gz",
              "https://github.com/mysql/mysql-connector-cpp.git")
-    add_versions("9.0.0", "113990744a1191038a00a05b19b14a67a71028070631b7594181977e8f4401a3")
+    add_versions("9.0.0", "61014a493b50645297db768262a8274fe8c5ef58203be478b5a1c37a3e551246")
     add_versions("8.4.0", "9721a514f47084ffa941b3c1119206784670114007cb57118618578114181111")
     add_versions("8.0.33", "3613a98914301944a05e881115e9c80190477865181111111111111111111111") -- Example older version, hash needs verification if used
 
