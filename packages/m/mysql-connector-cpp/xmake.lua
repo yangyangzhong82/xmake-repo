@@ -11,11 +11,7 @@ package("mysql-connector-cpp")
     add_versions("8.0.33", "3613a98914301944a05e881115e9c80190477865181111111111111111111111") -- Example older version, hash needs verification if used
 
     add_deps("cmake")
-    add_deps("openssl", "protobuf-cpp")
 
-    -- Add patch for Windows crypt32 linking issue
-    -- TODO: Replace PLACEHOLDER_SHA256_FOR_CRYPT32_PATCH with the actual hash
-    -- Use `xmake sha256 packages/m/mysql-connector-cpp/patches/9.0.0/win_link_crypt32.patch`
 on_install(function(package)
 import("package.tools.cmake").install(package)
 
