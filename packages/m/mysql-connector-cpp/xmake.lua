@@ -10,7 +10,8 @@ package("mysql-connector-cpp")
     add_versions("8.4.0", "9721a514f47084ffa941b3c1119206784670114007cb57118618578114181111")
     add_versions("8.0.33", "3613a98914301944a05e881115e9c80190477865181111111111111111111111") -- Example older version, hash needs verification if used
 
-    add_deps("openssl", "protobuf")
+    add_deps("cmake")
+    add_deps("openssl", "protobuf-cpp")
 
     -- Default to shared library build, as per connector's default
     add_configs("shared", {description = "Build shared library.", default = true, type = "boolean"})
@@ -47,7 +48,7 @@ package("mysql-connector-cpp")
             table.insert(configs, "-DOPENSSL_LIBRARIES=" .. openssl_installdir .. "/lib")
         end
 
-        local protobuf_installdir = package:dep("protobuf"):installdir()
+        local protobuf_installdir = package:dep("protobuf-cpp"):installdir()
         if protobuf_installdir then
              -- CMake find_dependency(Protobuf) needs PROTOBUF_ROOT or similar hints
             table.insert(configs, "-DProtobuf_ROOT=" .. protobuf_installdir)
