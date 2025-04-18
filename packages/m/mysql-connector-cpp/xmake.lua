@@ -13,66 +13,10 @@ package("mysql-connector-cpp")
     add_deps("cmake")
     add_deps("openssl", "protobuf-cpp")
 
-    -- Default to shared library build, as per connector's default
-    add_configs("shared", {description = "Build shared library.", default = true, type = "boolean"})
+    -- Add patch for Windows crypt32 linking issue
+    -- TODO: Replace PLACEHOLDER_SHA256_FOR_CRYPT32_PATCH with the actual hash
+    -- Use `xmake sha256 packages/m/mysql-connector-cpp/patches/9.0.0/win_link_crypt32.patch`
+on_install(function(package)
+import("package.tools.cmake").install(package)
 
-    on_install("windows", "linux", "macosx", function (package)
-        local configs = {}
-        table.insert(configs, "-DCMAKE_INSTALL_LIBDIR=" .. package:installdir("lib"))
-        table.insert(configs, "-DCMAKE_INSTALL_INCLUDEDIR=" .. package:installdir("include"))
-        table.insert(configs, "-DWITH_JDBC=OFF")
-        table.insert(configs, "-DWITH_TESTS=OFF")
-        -- BUILD_STATIC=OFF builds shared lib, BUILD_STATIC=ON builds static lib
-        if package:config("shared") then
-            table.insert(configs, "-DBUILD_STATIC=OFF")
-        else
-            -- Note: This builds *only* the static library
-            table.insert(configs, "-DBUILD_STATIC=ON")
-            if package:is_plat("windows") then
-                -- When building static lib on windows, allow static runtime
-                table.insert(configs, "-DSTATIC_MSVCRT=ON")
-            end
-            -- Add define for static linking
-            package:add("defines", "STATIC_CONCPP")
-        end
-        -- Let CMake handle C++ standard via enable_cxx17()
-        -- table.insert(configs, "-DCMAKE_CXX_STANDARD=17")
-
-        -- Add dependency paths
-        local openssl_installdir = package:dep("openssl"):installdir()
-        if openssl_installdir then
-            -- CMake find_dependency(SSL) needs OPENSSL_ROOT_DIR or similar hints
-            table.insert(configs, "-DOPENSSL_ROOT_DIR=" .. openssl_installdir)
-            -- Some FindSSL modules might need these too
-            table.insert(configs, "-DOPENSSL_INCLUDE_DIR=" .. openssl_installdir .. "/include")
-            table.insert(configs, "-DOPENSSL_LIBRARIES=" .. openssl_installdir .. "/lib")
-        end
-
-        local protobuf_installdir = package:dep("protobuf-cpp"):installdir()
-        if protobuf_installdir then
-             -- CMake find_dependency(Protobuf) needs PROTOBUF_ROOT or similar hints
-            table.insert(configs, "-DProtobuf_ROOT=" .. protobuf_installdir)
-        end
-
-        import("package.tools.cmake").install(package, configs)
-
-        -- Ensure headers are in include directory (CMake should handle this with CMAKE_INSTALL_INCLUDEDIR)
-        -- os.cp("include/*", package:installdir("include"))
-    end)
-
-    on_load(function (package)
-        package:add("includedirs", "include")
-        if package:config("shared") then
-            package:add("links", "mysqlcppconn") -- Common name for shared lib
-        else
-            package:add("links", "mysqlcppconn-static") -- Common name for static lib
-            package:add("defines", "STATIC_CONCPP") -- Define needed for static linking
-        end
-        -- Add system libraries if needed (e.g., on Linux)
-        if package:is_plat("linux") then
-            package:add("syslinks", "pthread", "m", "dl")
-        elseif package:is_plat("windows") then
-             -- Dependencies like ws2_32, secur32 and crypt32 (for OpenSSL CAPI engine) might be needed
-             package:add("syslinks", "ws2_32", "secur32", "crypt32")
-        end
-    end)
+end)
