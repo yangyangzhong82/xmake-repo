@@ -4,6 +4,7 @@ package("PlayerData")
 
     add_urls("https://github.com/yangyangzhong82/Satori-Release/releases/download/$(version)/PlayerData.zip")
     add_versions("0.0.2", "472f33adc55f3c636ef180e1abfd7d14970af831ccfb59bb52165c5c87001075")
+    add_versions("0.0.5", "61ee86623d654aaa59c8a672d4957697977896872a96d5c0df6fa9a819b8ad6a")
     on_install(function (package)
         os.cp("include", package:installdir())
         os.cp("lib/*.lib", package:installdir("lib"))
