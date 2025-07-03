@@ -1,0 +1,10 @@
+package("PlayerData")
+    set_homepage("https://github.com/yangyangzhong82/Satori-Release")
+    set_description("PlayerData SDK")
+
+    add_urls("https://github.com/yangyangzhong82/Satori-Release/releases/download/$(version)/PlayerData.zip")
+    add_versions("0.0.2", "472f33adc55f3c636ef180e1abfd7d14970af831ccfb59bb52165c5c87001075")
+    on_install(function (package)
+        os.cp("include", package:installdir())
+        os.cp("lib/*.lib", package:installdir("lib"))
+    end)
