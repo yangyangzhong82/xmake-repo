@@ -1,6 +1,7 @@
 package("CauldronZero")
     add_urls("https://github.com/yangyangzhong82/CauldronZero/releases/download/$(version)/CauldronZero-windows-x64.zip")
     add_versions("0.0.2", "648f07ae0c6703dca23fc62ded513e605062cdc61be5b13dbe7940b3e2e3ea4e")
+    add_versions("0.0.3", "ed2fafad340d198e0395ea271fc7711d2b95078ee51c45390c123e6d5e0c1db3")
     on_install(function (package)
         os.cp("include", package:installdir())
         os.cp("lib/*.lib", package:installdir("lib"))
