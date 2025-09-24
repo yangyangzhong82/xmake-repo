@@ -1,0 +1,8 @@
+package("placeholder")
+    set_homepage("https://github.com/yangyangzhong82/Placeholder")
+    add_urls("https://github.com/yangyangzhong82/Placeholder/releases/download/$(version)/Placeholder-windows-x64.zip")
+    add_versions("0.0.1", "632a1d177377acadcef7e86e27295b071f9f400c1828f537a22bca447d388b11")
+    on_install(function (package)
+        os.cp("include", package:installdir())
+        os.cp("lib/*.lib", package:installdir("lib"))
+    end)
