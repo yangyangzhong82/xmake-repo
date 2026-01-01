@@ -3,7 +3,7 @@ package("catalyst")
     set_homepage("https://github.com/yangyangzhong82/Catalyst")
 
     add_urls("https://github.com/yangyangzhong82/Catalyst.git")
-    add_versions("0.0.1", "3776fb611fc2b0b75a33589debaea985b0ae80e5")
+    add_versions("0.0.1", "205a5e0fc08f8e9f476422bfe81a81b35e8153e6")
 
     on_install(function (package)
         import("package.tools.xmake").install(package)
