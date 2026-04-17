@@ -1,9 +1,9 @@
 package("protocol")
-    set_homepage("https://github.com/SculkCatalystMC/Protocol")
+    set_homepage("https://github.com/yangyangzhong82/Protocol")
     set_description("Minecraft Bedrock protocol library in C++23")
     set_license("MPL-2.0")
 
-    add_urls("https://github.com/SculkCatalystMC/Protocol.git")
+    add_urls("https://github.com/yangyangzhong82/Protocol.git")
     add_versions("dev", "main")
 
     add_deps("openssl")
