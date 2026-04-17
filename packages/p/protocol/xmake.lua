@@ -23,5 +23,21 @@ package("protocol")
     end)
 
     on_test(function (package)
-        assert(package:has_cxxincludes("sculk/protocol/MinecraftPackets.hpp", {configs = {languages = "c++23"}}))
+        assert(package:check_cxxsnippets({test = [[
+            #include <vector>
+            #include <cstddef>
+            #include <sculk/protocol/packet/UpdateBlockPacket.hpp>
+            #include <sculk/protocol/utility/deps/BinaryStream.hpp>
+
+            void test() {
+                std::vector<std::byte> buffer;
+                sculk::protocol::UpdateBlockPacket packet;
+                sculk::protocol::BinaryStream stream(buffer);
+                packet.mRuntimeId = 1;
+                packet.mFlag = 3;
+                packet.mLayer = 0;
+                packet.write(stream);
+                (void)packet.getId();
+            }
+        ]]}, {configs = {languages = "c++23"}}))
     end)
