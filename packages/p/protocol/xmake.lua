@@ -12,8 +12,7 @@ package("protocol")
     on_install(function (package)
         if os.isfile("xmake.lua") then
             import("package.tools.xmake").install(package, {
-                mode = package:is_debug() and "debug" or "release",
-                configs = {shared = package:config("shared")}
+                shared = package:config("shared")
             })
         else
             import("package.tools.cmake").install(package, {
@@ -24,5 +23,5 @@ package("protocol")
     end)
 
     on_test(function (package)
-        assert(package:has_cxxincludes("sculk/protocol/MinecraftPackets.hpp"))
+        assert(package:has_cxxincludes("sculk/protocol/MinecraftPackets.hpp", {configs = {languages = "c++23"}}))
     end)
