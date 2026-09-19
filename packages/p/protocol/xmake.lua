@@ -6,7 +6,7 @@ package("protocol")
     add_urls("https://github.com/yangyangzhong82/BedrockProtocol.git")
     add_versions("v975", "15a144aee446c08cb40823503a2a6d145a120484")
     add_versions("v2168", "dd0485d055a65bcaac2375fe757dd169dd6ab0c2")
-
+    add_versions("v2193", "bf3cc6449ea505392a1d5af6e8834104d32b4655")
     add_deps("openssl3")
     add_configs("shared", {description = "Build shared library", default = false, type = "boolean"})
 
