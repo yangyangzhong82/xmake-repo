@@ -1,12 +1,13 @@
 package("protocol")
     set_homepage("https://github.com/yangyangzhong82/BedrockProtocol")
-    set_description("Minecraft Bedrock v975 protocol library in C++23")
+    set_description("Minecraft Bedrock protocol library in C++23 (including 1.26.60 / v2225)")
     set_license("MPL-2.0")
 
     add_urls("https://github.com/yangyangzhong82/BedrockProtocol.git")
     add_versions("v975", "15a144aee446c08cb40823503a2a6d145a120484")
     add_versions("v2168", "dd0485d055a65bcaac2375fe757dd169dd6ab0c2")
     add_versions("v2193", "bf3cc6449ea505392a1d5af6e8834104d32b4655")
+    add_versions("v2225", "1173240625b56cb283b735cca86903f6be35c8a0")
     add_deps("openssl3")
     add_configs("shared", {description = "Build shared library", default = false, type = "boolean"})
 
